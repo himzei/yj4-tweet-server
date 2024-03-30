@@ -13,7 +13,7 @@ import multer from "multer";
 const upload = multer({ storage: multer.memoryStorage() });
 const PORT = process.env.PORT;
 const corsOptions = {
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "https://yj4-tweet.netlify.app"],
   methods: ["GET", "POST"],
   credentials: true, // cookie 정보를 사용하기 위해서 클라이언트와서버 통신
 };
