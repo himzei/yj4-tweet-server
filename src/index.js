@@ -31,7 +31,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24,
       httpOnly: true, // javascript에서 사용이 안되게 하는 옵션
-      secure: false, // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
+      secure: true, // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
     },
     store: MongoStore.create({ mongoUrl: process.env.DB_URL + "/yj4-twitter" }),
   })
