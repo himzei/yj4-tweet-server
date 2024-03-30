@@ -33,13 +33,13 @@ app.use(
       httpOnly: true, // javascript에서 사용이 안되게 하는 옵션
       secure: process.env.NODE_ENV === "production", // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
       maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "none",
     },
     store: MongoStore.create({ mongoUrl: process.env.DB_URL + "/yj4-twitter" }),
   })
 );
 
 // 서브라우팅
+app.get("/", (req, res) => res.send({ result: true }));
 app.use("/users", userRouter); // 회원가입, 로그인, 카카오로그인
 app.use("/tweets", upload.single("file"), tweetRouter); // 글쓰기, 수정, 삭제, 읽기, 댓글
 
