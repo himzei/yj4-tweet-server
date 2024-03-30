@@ -26,6 +26,7 @@ export const userLogin = async (req, res) => {
       body: { username, password },
     } = req;
 
+    console.log("서버로그인: ", username, ", 패스워드: ", password);
     const user = await Users.findOne({ username });
     if (!user) {
       return res.send({ result: false, message: "해당하는 유저가 없습니다!" });
@@ -41,6 +42,7 @@ export const userLogin = async (req, res) => {
           id: user._id,
         };
         const data = req.session;
+        console.log(data);
         res.send({ result: true, data });
       });
     }
