@@ -18,6 +18,7 @@ const corsOptions = {
   credentials: true, // cookie 정보를 사용하기 위해서 클라이언트와서버 통신
 };
 const app = express();
+console.log(process.env.NODE_ENV === "production");
 
 app.use(express.json());
 app.use(morgan("dev"));
@@ -32,7 +33,7 @@ app.use(
       httpOnly: true, // javascript에서 사용이 안되게 하는 옵션
       secure: process.env.NODE_ENV === "production", // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
       maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "strict",
+      sameSite: "none",
     },
     store: MongoStore.create({ mongoUrl: process.env.DB_URL + "/yj4-twitter" }),
   })
