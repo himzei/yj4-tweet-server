@@ -35,7 +35,7 @@ export const userLogin = async (req, res) => {
     if (ok) {
       req.session.save(() => {
         req.session.user = {
-          avatar: user.avatar,
+          avatar: user?.avatar,
           username: user.username,
           email: user.email,
           id: user._id,
