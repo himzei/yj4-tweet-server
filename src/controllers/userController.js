@@ -63,13 +63,21 @@ export const userLogout = async (req, res) => {
 
 export const loginSuccess = async (req, res) => {
   try {
-    console.log("로그인 석세스", req.session);
+    const {
+      session: { user },
+    } = req;
+    console.log("로그인 석세스에서 user: ", user);
 
-    if (req.session.user) {
-      res.send({ result: true, user: req.session.user, isLogin: true });
+    if (user) {
+      console.log("유저있음");
+      res.send({ result: true, user, isLogin: true });
     } else {
+      console.log("유저없음");
       res.send({ result: true, isLogin: false });
     }
+    // if (req.session.user !== "") {
+    // } else {
+    // }
   } catch (error) {
     console.log(error);
     res.send({ result: false });
