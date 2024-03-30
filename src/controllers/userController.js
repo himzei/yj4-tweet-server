@@ -63,6 +63,8 @@ export const userLogout = async (req, res) => {
 
 export const loginSuccess = async (req, res) => {
   try {
+    console.log("로그인 석세스", req.session);
+
     if (req.session.user) {
       res.send({ result: true, user: req.session.user, isLogin: true });
     } else {
