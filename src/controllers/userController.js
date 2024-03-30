@@ -42,7 +42,7 @@ export const userLogin = async (req, res) => {
           id: user._id,
         };
         const data = req.session;
-        console.log(data);
+        console.log("로그인 후 세션저장: ", req.session);
         res.send({ result: true, data });
       });
     }
