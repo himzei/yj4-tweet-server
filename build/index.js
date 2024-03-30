@@ -26,19 +26,19 @@ app.use(_express["default"].json());
 app.use((0, _morgan["default"])("dev"));
 app.use((0, _cors["default"])(corsOptions));
 app.use((0, _expressSession["default"])({
-  name: "session ID",
+  name: "session",
   secret: process.env.SECRET,
   resave: false,
   // 세션이 변경되지 않아도 항상 저장되도록 설정합니다
   saveUninitialized: false,
   // 초기화되지 않은 세션을 저장소에 저장하지 않도록 설정합니다.
-  credentials: true,
   cookie: {
     httpOnly: true,
     // javascript에서 사용이 안되게 하는 옵션
-    secure: false,
+    secure: process.env.NODE_ENV === "production",
     // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
-    maxAge: 1000 * 60 * 60 * 24
+    maxAge: 1000 * 60 * 60 * 24,
+    sameSite: "strict"
   },
   store: _connectMongo["default"].create({
     mongoUrl: process.env.DB_URL + "/yj4-twitter"
