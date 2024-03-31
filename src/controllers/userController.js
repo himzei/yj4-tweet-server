@@ -40,13 +40,11 @@ export const userLogin = async (req, res) => {
           email: user.email,
           id: user._id,
         };
+
         const data = req.session;
-        res.cookie("name", "BRNGDY", {
-          expires: new Date(Date.now() + 60000),
-          httpOnly: true,
-          secure: false,
-          signed: true,
-        });
+        console.log(req.session);
+
+        res.cookie("name", process.env.SECRET);
         res.send({ result: true, data });
       });
     }
@@ -70,13 +68,10 @@ export const loginSuccess = async (req, res) => {
     const {
       session: { user },
     } = req;
-    console.log("로그인 석세스에서 user: ", user);
 
     if (user) {
-      console.log("유저있음");
       res.send({ result: true, user, isLogin: true });
     } else {
-      console.log("유저없음");
       res.send({ result: true, isLogin: false });
     }
     // if (req.session.user !== "") {
