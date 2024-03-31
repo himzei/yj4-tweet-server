@@ -28,7 +28,6 @@ app.use(morgan("dev"));
 app.use(cors(corsOptions));
 app.use(
   session({
-    name: "test",
     secret: process.env.SECRET,
     resave: false, // 세션이 변경되지 않아도 항상 저장되도록 설정합니다
     saveUninitialized: true, // 초기화되지 않은 세션을 저장소에 저장하지 않도록 설정합니다.

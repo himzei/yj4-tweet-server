@@ -64,19 +64,18 @@ export const userLogout = async (req, res) => {
 };
 
 export const loginSuccess = async (req, res) => {
+  const {
+    session: { user },
+    cookies,
+  } = req;
+
+  const userId = user?.id.toString();
+
+  console.log("유저아이디: ", userId);
+  console.log("쿠키정보: ", cookies.tweetIn);
+  console.log(userId === cookies?.tweetIn);
   try {
-    const {
-      session: { user },
-      cookies,
-    } = req;
-
-    const userId = user?.id.toString();
-
-    console.log("유저아이디: ", userId);
-    console.log("쿠키정보: ", cookies.tweetIn);
-    console.log(userId === cookies?.tweetIn);
-
-    if (req.cookies?.tweetIn === userId) {
+    if (cookies.tweetIn && cookies.tweetIn === userId) {
       res.send({ result: true, user, isLogin: true });
     } else {
       res.send({ result: true, isLogin: false });
