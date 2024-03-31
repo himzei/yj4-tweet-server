@@ -43,6 +43,7 @@ export const userLogin = async (req, res) => {
 
         const data = req.session;
         console.log("유저로그인", data.user.id.toString());
+        console.log("로그인 후 세션정보: ", data);
 
         res.cookie("tweetIn", data.user.id.toString(), process.env.SECRET);
         res.send({ result: true, data });
@@ -73,7 +74,7 @@ export const loginSuccess = async (req, res) => {
 
   console.log("유저아이디: ", userId);
   console.log("쿠키정보: ", cookies.tweetIn);
-  console.log(userId === cookies?.tweetIn);
+
   try {
     if (cookies.tweetIn && cookies.tweetIn === userId) {
       res.send({ result: true, user, isLogin: true });
