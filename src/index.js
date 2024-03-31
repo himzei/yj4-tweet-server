@@ -11,7 +11,7 @@ import multer from "multer";
 import cookieParser from "cookie-parser";
 
 // const upload = multer({ dest: "uploads/" });
-console.log(process.env.NODE_ENV === "production");
+// console.log(process.env.NODE_ENV === "production");
 const upload = multer({ storage: multer.memoryStorage() });
 const PORT = process.env.PORT;
 const corsOptions = {
@@ -23,7 +23,7 @@ const app = express();
 console.log(process.env.NODE_ENV === "production");
 
 // 미들웨어
-app.use(cookieParser(process.env.SECRET));
+app.use(cookieParser());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors(corsOptions));

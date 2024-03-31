@@ -45,7 +45,7 @@ export const userLogin = async (req, res) => {
         console.log("유저로그인", data.user.id.toString());
         console.log("로그인 후 세션정보: ", data);
 
-        res.cookie("tweetIn", data.user.id.toString(), process.env.SECRET);
+        res.cookie("tweetIn", data.user.id.toString());
         res.send({ result: true, data });
       });
     }
