@@ -8,6 +8,7 @@ import MongoStore from "connect-mongo";
 import userRouter from "./routers/userRouter";
 import tweetRouter from "./routers/tweetRouter";
 import multer from "multer";
+import cookieParser from "cookie-parser";
 
 // const upload = multer({ dest: "uploads/" });
 const upload = multer({ storage: multer.memoryStorage() });
@@ -20,12 +21,13 @@ const corsOptions = {
 const app = express();
 console.log(process.env.NODE_ENV === "production");
 
+// 미들웨어
+app.use(cookieParser(process.env.SECRET));
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors(corsOptions));
 app.use(
   session({
-    name: "session",
     secret: process.env.SECRET,
     resave: false, // 세션이 변경되지 않아도 항상 저장되도록 설정합니다
     saveUninitialized: true, // 초기화되지 않은 세션을 저장소에 저장하지 않도록 설정합니다.

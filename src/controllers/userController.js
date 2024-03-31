@@ -26,7 +26,6 @@ export const userLogin = async (req, res) => {
       body: { username, password },
     } = req;
 
-    console.log("서버로그인: ", username, ", 패스워드: ", password);
     const user = await Users.findOne({ username });
     if (!user) {
       return res.send({ result: false, message: "해당하는 유저가 없습니다!" });
@@ -42,7 +41,12 @@ export const userLogin = async (req, res) => {
           id: user._id,
         };
         const data = req.session;
-        console.log("로그인 후 세션저장: ", req.session);
+        res.cookie("name", "BRNGDY", {
+          expires: new Date(Date.now() + 60000),
+          httpOnly: true,
+          secure: false,
+          signed: true,
+        });
         res.send({ result: true, data });
       });
     }
