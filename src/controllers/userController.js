@@ -44,7 +44,7 @@ export const userLogin = async (req, res) => {
         const data = req.session;
         console.log(req.session);
 
-        res.cookie("name", process.env.SECRET);
+        res.cookie("tweetIn", data.user.id, process.env.SECRET);
         res.send({ result: true, data });
       });
     }
@@ -67,16 +67,15 @@ export const loginSuccess = async (req, res) => {
   try {
     const {
       session: { user },
+      cookies,
     } = req;
+    console.log(cookies);
 
-    if (user) {
+    if (req.cookies.tweetIn === user.id) {
       res.send({ result: true, user, isLogin: true });
     } else {
       res.send({ result: true, isLogin: false });
     }
-    // if (req.session.user !== "") {
-    // } else {
-    // }
   } catch (error) {
     console.log(error);
     res.send({ result: false });
