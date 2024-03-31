@@ -42,9 +42,9 @@ export const userLogin = async (req, res) => {
         };
 
         const data = req.session;
-        console.log(req.session);
+        console.log("유저로그인", data.user.id.toString());
 
-        res.cookie("tweetIn", data.user.id, process.env.SECRET);
+        res.cookie("tweetIn", data.user.id.toString(), process.env.SECRET);
         res.send({ result: true, data });
       });
     }
@@ -70,11 +70,13 @@ export const loginSuccess = async (req, res) => {
       cookies,
     } = req;
 
-    console.log("유저아이디: ", user.id);
-    console.log("쿠키정보: ", cookies.tweetIn);
-    console.log(user.id === cookies.tweetIn);
+    const userId = user?.id.toString();
 
-    if (req.cookies?.tweetIn === user?.id) {
+    console.log("유저아이디: ", userId);
+    console.log("쿠키정보: ", cookies.tweetIn);
+    console.log(userId === cookies?.tweetIn);
+
+    if (req.cookies?.tweetIn === userId) {
       res.send({ result: true, user, isLogin: true });
     } else {
       res.send({ result: true, isLogin: false });
