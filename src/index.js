@@ -34,7 +34,6 @@ app.use(
     saveUninitialized: true, // 초기화되지 않은 세션을 저장소에 저장하지 않도록 설정합니다.
     cookie: {
       httpOnly: true, // javascript에서 사용이 안되게 하는 옵션
-      sameSite: process.env.NODE_ENV === "production",
       secure: process.env.NODE_ENV === "production", // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
       maxAge: 1000 * 60 * 60 * 24,
     },
