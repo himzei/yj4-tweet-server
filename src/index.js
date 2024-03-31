@@ -11,6 +11,7 @@ import multer from "multer";
 import cookieParser from "cookie-parser";
 
 // const upload = multer({ dest: "uploads/" });
+console.log(process.env.NODE_ENV === "production");
 const upload = multer({ storage: multer.memoryStorage() });
 const PORT = process.env.PORT;
 const corsOptions = {
@@ -33,9 +34,8 @@ app.use(
     saveUninitialized: true, // 초기화되지 않은 세션을 저장소에 저장하지 않도록 설정합니다.
     cookie: {
       httpOnly: true, // javascript에서 사용이 안되게 하는 옵션
-      sameSite: process.env.NODE_ENV === "production" && "none",
+      sameSite: process.env.NODE_ENV === "production",
       secure: process.env.NODE_ENV === "production", // HTTPS를 통해서만 세션 쿠키를 전송하도록 설정합니다.
-      domain: process.env.NODE_ENV === "production" && ".netlify.app",
       maxAge: 1000 * 60 * 60 * 24,
     },
     store: new MongoStore({ mongoUrl: process.env.DB_URL + "/yj4-twitter" }),
